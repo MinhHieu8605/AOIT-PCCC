@@ -21,30 +21,30 @@ quan sát dữ liệu và gửi lệnh điều khiển từ máy tính.
 
 ## Ngưỡng trạng thái
 
-| Trạng thái | Điều kiện |
-|---|---|
-| `SAFE` | Cảm biến hoạt động và không có điều kiện cảnh báo/nguy hiểm |
-| `WARNING` | Nhiệt độ `>= 45°C` hoặc khí gas `>= 60%` |
-| `DANGER` | Nhiệt độ `>= 60°C`, khí gas `>= 80%`, mực nước `<= 25%` hoặc đang chạy TEST |
-| `FAULT` | DHT22 hoặc HC-SR04 trả về dữ liệu không hợp lệ |
+| Trạng thái | Điều kiện                                                                   |
+| ---------- | --------------------------------------------------------------------------- |
+| `SAFE`     | Cảm biến hoạt động và không có điều kiện cảnh báo/nguy hiểm                 |
+| `WARNING`  | Nhiệt độ `>= 45°C` hoặc khí gas `>= 60%`                                    |
+| `DANGER`   | Nhiệt độ `>= 60°C`, khí gas `>= 80%`, mực nước `<= 25%` hoặc đang chạy TEST |
+| `FAULT`    | DHT22 hoặc HC-SR04 trả về dữ liệu không hợp lệ                              |
 
 Các điều kiện trong cùng một trạng thái được kết hợp bằng phép **HOẶC**. Vì vậy,
 còi chỉ tắt khi không còn điều kiện `DANGER` nào và chế độ TEST đã kết thúc.
 
 ## Kết nối phần cứng
 
-| Thiết bị | Chân ESP32 |
-|---|---|
-| DHT22 DATA | GPIO 15 |
-| HC-SR04 TRIG | GPIO 5 |
-| HC-SR04 ECHO | GPIO 18 |
-| Biến trở mô phỏng khí gas | GPIO 34 |
-| LED xanh | GPIO 25 |
-| LED vàng | GPIO 26 |
-| LED đỏ | GPIO 13 |
-| Buzzer | GPIO 4 |
-| Nút TEST | GPIO 27 |
-| LCD I2C SDA/SCL | GPIO 21 / GPIO 22 |
+| Thiết bị                  | Chân ESP32        |
+| ------------------------- | ----------------- |
+| DHT22 DATA                | GPIO 15           |
+| HC-SR04 TRIG              | GPIO 5            |
+| HC-SR04 ECHO              | GPIO 18           |
+| Biến trở mô phỏng khí gas | GPIO 34           |
+| LED xanh                  | GPIO 25           |
+| LED vàng                  | GPIO 26           |
+| LED đỏ                    | GPIO 13           |
+| Buzzer                    | GPIO 4            |
+| Nút TEST                  | GPIO 27           |
+| LCD I2C SDA/SCL           | GPIO 21 / GPIO 22 |
 
 ## Mô hình IoT
 
@@ -54,14 +54,14 @@ Cảm biến -> ESP32/Edge -> Wi-Fi -> MQTT Broker -> MQTTX
                 +---------- command --------+
 ```
 
-| Thành phần | Vai trò |
-|---|---|
-| DHT22, biến trở, HC-SR04 | Tầng cảm nhận |
-| ESP32 xử lý ngưỡng và điều khiển còi | Edge |
-| Wokwi IoT Gateway | Gateway của simulator |
-| Wokwi-GUEST | Mạng Wi-Fi |
-| broker.hivemq.com | MQTT Broker |
-| MQTTX/MQTT Explorer | Tầng ứng dụng, quan sát và gửi lệnh |
+| Thành phần                           | Vai trò                             |
+| ------------------------------------ | ----------------------------------- |
+| DHT22, biến trở, HC-SR04             | Tầng cảm nhận                       |
+| ESP32 xử lý ngưỡng và điều khiển còi | Edge                                |
+| Wokwi IoT Gateway                    | Gateway của simulator               |
+| Wokwi-GUEST                          | Mạng Wi-Fi                          |
+| broker.hivemq.com                    | MQTT Broker                         |
+| MQTTX/MQTT Explorer                  | Tầng ứng dụng, quan sát và gửi lệnh |
 
 ## Cấu trúc project
 

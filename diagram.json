@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "author": "AIoT PCCC MQTT Demo",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 20, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -155, "left": -250, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "ultrasonic", "top": 35, "left": -300, "attrs": { "distance": "100" } },
+    { "type": "wokwi-potentiometer", "id": "gas", "top": 180, "left": -255, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd", "top": -210, "left": 85, "attrs": { "pins": "i2c", "background": "blue", "color": "white" } },
+    { "type": "wokwi-led", "id": "green", "top": -55, "left": 300, "attrs": { "color": "green", "label": "SAFE" } },
+    { "type": "wokwi-resistor", "id": "rg", "top": -5, "left": 300, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "yellow", "top": 55, "left": 300, "attrs": { "color": "yellow", "label": "WARNING" } },
+    { "type": "wokwi-resistor", "id": "ry", "top": 105, "left": 300, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "red", "top": 165, "left": 300, "attrs": { "color": "red", "label": "DANGER" } },
+    { "type": "wokwi-resistor", "id": "rr", "top": 215, "left": 300, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "buzzer", "top": 275, "left": 180, "attrs": { "volume": "0.6" } },
+    { "type": "wokwi-pushbutton", "id": "testButton", "top": 285, "left": -90, "attrs": { "color": "red", "label": "TEST", "key": "T" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "dht:VCC", "esp:3V3", "red", [] ],
+    [ "dht:SDA", "esp:15", "green", [] ],
+    [ "dht:GND", "esp:GND", "black", [] ],
+
+    [ "ultrasonic:VCC", "esp:5V", "red", [] ],
+    [ "ultrasonic:TRIG", "esp:5", "blue", [] ],
+    [ "ultrasonic:ECHO", "esp:18", "orange", [] ],
+    [ "ultrasonic:GND", "esp:GND", "black", [] ],
+
+    [ "gas:VCC", "esp:3V3", "red", [] ],
+    [ "gas:SIG", "esp:34", "purple", [] ],
+    [ "gas:GND", "esp:GND", "black", [] ],
+
+    [ "lcd:VCC", "esp:5V", "red", [] ],
+    [ "lcd:GND", "esp:GND", "black", [] ],
+    [ "lcd:SDA", "esp:21", "green", [] ],
+    [ "lcd:SCL", "esp:22", "blue", [] ],
+
+    [ "esp:25", "green:A", "green", [] ],
+    [ "green:C", "rg:1", "black", [] ],
+    [ "rg:2", "esp:GND", "black", [] ],
+    [ "esp:26", "yellow:A", "yellow", [] ],
+    [ "yellow:C", "ry:1", "black", [] ],
+    [ "ry:2", "esp:GND", "black", [] ],
+    [ "esp:13", "red:A", "red", [] ],
+    [ "red:C", "rr:1", "black", [] ],
+    [ "rr:2", "esp:GND", "black", [] ],
+
+    [ "buzzer:2", "esp:4", "purple", [] ],
+    [ "buzzer:1", "esp:GND", "black", [] ],
+    [ "testButton:1.l", "esp:27", "cyan", [] ],
+    [ "testButton:2.l", "esp:GND", "black", [] ]
+  ],
+  "dependencies": {}
+}
